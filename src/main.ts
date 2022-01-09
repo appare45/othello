@@ -1,8 +1,21 @@
-import './style.css'
+import * as THREE from "three";
+import "./style.css";
 
-const app = document.querySelector<HTMLDivElement>('#app')!
+// レンダターを作成
+export const renderer = new THREE.WebGL1Renderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-app.innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`
+// カメラを作成
+// 引数は視野角、縦横比、描画の最短距離、描画の最長距離
+export const camera = new THREE.PerspectiveCamera(
+  45,
+  window.innerWidth / window.innerHeight,
+  1,
+  500
+);
+camera.position.set(0, 0, 100);
+camera.lookAt(0, 0, 0);
+
+// シーンを作成
+export const scene = new THREE.Scene();
